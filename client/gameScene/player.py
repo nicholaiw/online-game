@@ -15,11 +15,13 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = y
 
 
+
     def loadSprite(self):
         currentFile = pathlib.Path(__file__)
-        spritesDir = currentFile.parent.parent / "sprites"
+        spritesDir = currentFile.parent.parent.parent / "sprites"
         spritesPath = spritesDir / "run.png"
         return pygame.image.load(str(spritesPath))
+
 
 
     def input(self):
@@ -34,6 +36,7 @@ class Player(pygame.sprite.Sprite):
             directionY -= 1
         if keys[pygame.K_DOWN]:
             directionY += 1
+
         if directionX != 0 or directionY != 0:
             length = math.sqrt(directionX**2 + directionY**2)
             directionX = directionX / length
@@ -44,12 +47,14 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += directionX
         self.rect.y += directionY
 
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
+
+
+
     def updatePosition(self, x, y):
         self.rect.x = x
         self.rect.y = y
 
     def getPosition(self):
         return f"{int(self.rect.x)},{int(self.rect.y)}"
-
-    def draw(self, screen):
-        screen.blit(self.image, self.rect)

@@ -1,7 +1,7 @@
 import pygame
 from network import Network
-from player import Player
-from camera import Camera
+from gameScene.player import Player
+from gameScene.camera import Camera
 
 width = 800
 height = 600
@@ -55,15 +55,6 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_SPACE]:
-        spriteBatch.zoomScale = 8
-    else:
-        spriteBatch.zoomScale = 4
-
-
-
 
 
     updatePlayer()

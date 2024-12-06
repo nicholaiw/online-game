@@ -11,15 +11,6 @@ class Network:
         self.players = {}
         self.serverAddress = (self.host, self.port)
 
-    def sendPosition(self, position):
-        self.client.sendto(f"position,{position}".encode('utf-8'), self.serverAddress)
-
-    def sendConnect(self):
-        self.client.sendto(f"connect,{self.playerId}".encode('utf-8'), self.serverAddress)
-
-    def sendDisconnect(self):
-        self.client.sendto(f"disconnect,{self.playerId}".encode('utf-8'), self.serverAddress)
-
 
     def receiveData(self):
         while True:
@@ -35,7 +26,19 @@ class Network:
             except:
                 break
 
-
     def startReceiving(self):
         receiveThread = threading.Thread(target=self.receiveData)
         receiveThread.start()
+
+
+    def sendConnect(self):
+        self.client.sendto(f"connect,{self.playerId}".encode('utf-8'), self.serverAddress)
+
+    def sendDisconnect(self):
+        self.client.sendto(f"disconnect,{self.playerId}".encode('utf-8'), self.serverAddress)
+
+
+
+
+    def sendPosition(self, position):
+        self.client.sendto(f"position,{position}".encode('utf-8'), self.serverAddress)
