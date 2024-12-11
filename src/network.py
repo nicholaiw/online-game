@@ -37,8 +37,5 @@ class Network:
     def sendDisconnect(self):
         self.client.sendto(f"disconnect,{self.playerId}".encode('utf-8'), self.serverAddress)
 
-
-
-
     def sendPosition(self, position):
         self.client.sendto(f"position,{position}".encode('utf-8'), self.serverAddress)

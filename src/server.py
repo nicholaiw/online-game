@@ -1,13 +1,18 @@
 import socket
 import threading
-
 HOST = '127.0.0.1'
 PORT = 5555
 
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server.bind((HOST, PORT))
 
+rooms = {}
+clients = {}
 players = {}
+
+
+room = 3
+player = 3539
 
 
 def receiveMessage(data, address):
@@ -15,7 +20,7 @@ def receiveMessage(data, address):
     playerId = address[1]
 
     if messageType == "connect":
-        players[playerId] = {"address": address, "x": 0, "y": 0}
+        rooms[room][player] = {"address": address, "x": 0, "y": 0}
 
 
     elif messageType == "position":
@@ -33,7 +38,10 @@ def receiveMessage(data, address):
 def sendMessage():
     playerData = ';'.join([f"{pid},{p['x']},{p['y']}" for pid, p in players.items()])
     for player in players.values():
+
         server.sendto(playerData.encode('utf-8'), player["address"])
+    
+
 
 def startServer():
     while True:

@@ -22,8 +22,6 @@ class Camera(pygame.sprite.Group):
         self.resizeableSurfaceOffset.y = self.resizeableSurfaceSize[1] // 2 - self.halfHeight
 
 
-
-
     def draw(self, target):
 
         self.offset.x = target.rect.centerx - self.halfWidth

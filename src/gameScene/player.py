@@ -14,15 +14,11 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-
-
     def loadSprite(self):
         currentFile = pathlib.Path(__file__)
         spritesDir = currentFile.parent.parent.parent / "sprites"
         spritesPath = spritesDir / "run.png"
         return pygame.image.load(str(spritesPath))
-
-
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -49,8 +45,6 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
-
-
 
     def updatePosition(self, x, y):
         self.rect.x = x
