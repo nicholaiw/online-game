@@ -13,7 +13,7 @@ pygame.display.set_caption("online game")
 clock = pygame.time.Clock()
 
 HOST = 'localhost'
-PORT = 5555 
+PORT = 5555
 
 network = Network(HOST, PORT)
 
