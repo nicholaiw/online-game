@@ -30,6 +30,8 @@ class Network:
         receiveThread = threading.Thread(target=self.receiveData)
         receiveThread.start()
 
+    def sendData(self, data):
+        self.client.sendto(data.encode('utf-8'), self.serverAddress)
 
     def sendConnect(self):
         self.client.sendto(f"connect,{self.playerId}".encode('utf-8'), self.serverAddress)
@@ -37,8 +39,3 @@ class Network:
     def sendDisconnect(self):
         self.client.sendto(f"disconnect,{self.playerId}".encode('utf-8'), self.serverAddress)
 
-
-
-
-    def sendPosition(self, position):
-        self.client.sendto(f"position,{position}".encode('utf-8'), self.serverAddress)

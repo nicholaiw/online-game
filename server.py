@@ -10,27 +10,27 @@ server.bind((HOST, PORT))
 players = {}
 
 
-def receiveMessage(data, address):
-    messageType, content = data.decode('utf-8').split(',', 1)
+def receiveData(data, address):
+    DataType, data = data.decode('utf-8').split(',', 1)
     playerId = address[1]
 
-    if messageType == "connect":
+    if DataType == "connect":
         players[playerId] = {"address": address, "x": 0, "y": 0}
 
 
-    elif messageType == "position":
-        x, y = map(int, content.split(','))
+    elif DataType == "position":
+        x, y = map(int, data.split(','))
         if playerId in players:
             players[playerId]["x"] = x
             players[playerId]["y"] = y
         
-    elif messageType == "disconnect":
+    elif DataType == "disconnect":
         if playerId in players:
             del players[playerId]
 
             
 
-def sendMessage():
+def sendData():
     playerData = ';'.join([f"{pid},{p['x']},{p['y']}" for pid, p in players.items()])
     for player in players.values():
         server.sendto(playerData.encode('utf-8'), player["address"])
@@ -39,8 +39,8 @@ def startServer():
     while True:
         try:
             data, address = server.recvfrom(1024)
-            threading.Thread(target=receiveMessage, args=(data, address)).start()
-            sendMessage()
+            threading.Thread(target=receiveData, args=(data, address)).start()
+            sendData()
         except Exception as e:
             print(f"Error: {e}")
 

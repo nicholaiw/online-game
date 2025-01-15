@@ -8,17 +8,15 @@ class Player(pygame.sprite.Sprite):
 
 
         self.id = player_id
-        self.speed = 5
+        self.speed = 2
         self.image = self.loadSprite()
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
 
-
-
     def loadSprite(self):
         currentFile = pathlib.Path(__file__)
-        spritesDir = currentFile.parent.parent.parent / "sprites"
+        spritesDir = currentFile.parent.parent / "sprites"
         spritesPath = spritesDir / "run.png"
         return pygame.image.load(str(spritesPath))
 
@@ -42,6 +40,7 @@ class Player(pygame.sprite.Sprite):
             directionX = directionX / length
             directionY = directionY / length
         self.movement(directionX * self.speed, directionY * self.speed)
+
 
     def movement(self, directionX, directionY):
         self.rect.x += directionX

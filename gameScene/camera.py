@@ -13,7 +13,7 @@ class Camera(pygame.sprite.Group):
         self.halfHeight = self.displaySurface.get_size()[1] // 2
 
         self.zoomScale = 4
-        self.resizeableSurfaceSize = (1000, 1000)
+        self.resizeableSurfaceSize = (300, 300)
         self.resizeableSurface = pygame.Surface(self.resizeableSurfaceSize, pygame.SRCALPHA)
         self.resizeableSurfaceRectangle = self.resizeableSurface.get_rect(center=(self.halfWidth, self.halfHeight))
         self.resizeableSurfaceSizeVector = pygame.math.Vector2(self.resizeableSurfaceSize)
@@ -29,7 +29,7 @@ class Camera(pygame.sprite.Group):
         self.offset.x = target.rect.centerx - self.halfWidth
         self.offset.y = target.rect.centery - self.halfHeight
 
-        self.resizeableSurface.fill('#aaaaaa')
+        self.resizeableSurface.fill('#335544')
 
         for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery):
             offsetPosition = sprite.rect.topleft - self.offset + self.resizeableSurfaceOffset
