@@ -16,8 +16,8 @@ class Player(pygame.sprite.Sprite):
 
     def loadSprite(self):
         currentFile = pathlib.Path(__file__)
-        spritesDir = currentFile.parent.parent / "sprites"
-        spritesPath = spritesDir / "run.png"
+        spritesDirectory = currentFile.parent.parent / "assets" / "sprites"
+        spritesPath = spritesDirectory / "run.png"
         return pygame.image.load(str(spritesPath))
 
 
@@ -50,10 +50,6 @@ class Player(pygame.sprite.Sprite):
         screen.blit(self.image, self.rect)
 
 
-
     def updatePosition(self, x, y):
         self.rect.x = x
         self.rect.y = y
-
-    def getPosition(self):
-        return f"{int(self.rect.x)},{int(self.rect.y)}"

@@ -3,6 +3,7 @@ from network import Network
 
 
 pygame.init()
+pygame.font.init()
 screenWidth = 600
 screenHeight = 400
 screen = pygame.display.set_mode((screenWidth, screenHeight))
