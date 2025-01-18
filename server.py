@@ -14,6 +14,7 @@ def receiveData(data, address):
     DataType, data = data.decode('utf-8').split(',', 1)
     playerId = address[1]
 
+
     if DataType == "connect":
         players[playerId] = {"address": address, "x": 0, "y": 0}
 
@@ -24,6 +25,7 @@ def receiveData(data, address):
             players[playerId]["x"] = x
             players[playerId]["y"] = y
         
+
     elif DataType == "disconnect":
         if playerId in players:
             del players[playerId]

@@ -15,3 +15,4 @@ PORT = 5555
 
 network = Network(HOST, PORT)
 
+activeScenes = []

@@ -32,6 +32,7 @@ class Network:
 
     def sendData(self, data):
         self.client.sendto(data.encode('utf-8'), self.serverAddress)
+        print('testing')
 
     def sendConnect(self):
         self.client.sendto(f"connect,{self.playerId}".encode('utf-8'), self.serverAddress)

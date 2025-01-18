@@ -1,10 +1,13 @@
 from variables import *
 from gameScene.scene import gameScene
-from startScene.scene import *
+from startScene.scene import startScene
 from ui import *
 
 network.startReceiving()
 network.sendConnect()
+
+activeScenes.append(gameScene)
+activeScenes.append(startScene)
 
 run = True
 while run:
@@ -12,8 +15,8 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-    gameScene()
-    drawText('hi', font, '#ffffff', 0, 0)
+    for scenes in range(len(activeScenes)):
+        activeScenes[scenes]()
 
     pygame.display.flip()
     clock.tick(60)

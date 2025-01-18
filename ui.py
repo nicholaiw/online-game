@@ -13,6 +13,6 @@ font = pygame.font.Font(loadFont('font'), 32)
 
 def drawText(text, font, color, x , y):
     textSurface = font.render(text, True, color)
-    screen.blit(textSurface, (x, y))
+    screen.blit(textSurface, textSurface.get_rect(center=(x, y)))
 
 
