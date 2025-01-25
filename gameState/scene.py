@@ -1,10 +1,10 @@
 from variables import *
-from gameScene.camera import Camera
-from gameScene.player import Player
+from gameState.camera import Camera
+from gameState.player import Player
 
 
 spriteBatch = Camera()
-localPlayer = Player(network.playerId, group=spriteBatch)
+localPlayer = Player(network.clientID, group=spriteBatch)
 
 
 def updatePlayer():
@@ -28,7 +28,7 @@ def updateRemotePlayers():
 
                
 
-def gameScene():
+def gameState():
     cameraTarget = localPlayer
     updatePlayer()
     updateRemotePlayers()

@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
     def input(self):
         keys = pygame.key.get_pressed()
         directionX, directionY = 0, 0
-
+ 
         if keys[pygame.K_LEFT]:
             directionX -= 1
         if keys[pygame.K_RIGHT]:
