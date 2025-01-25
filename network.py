@@ -7,8 +7,8 @@ class Network:
         self.port = port
         self.client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.client.bind(('', 0))
-        self.playerId = self.client.getsockname()[1]
-        self.players = {}
+        self.clientID = self.client.getsockname()[1]
+        self.roomData = {}
         self.serverAddress = (self.host, self.port)
 
 
@@ -17,12 +17,12 @@ class Network:
             try:
                 data, _ = self.client.recvfrom(1024)
                 playersData = data.decode('utf-8').split(';')
-                self.players = {}
+                self.roomData = {}
                 
                 for player in playersData:
                     pid, x, y = map(int, player.split(','))
                     if pid != self.playerId:
-                        self.players[pid] = {'x': x, 'y': y}  
+                        self.roomData[pid] = {'x': x, 'y': y}  
             except:
                 break
 
@@ -32,11 +32,5 @@ class Network:
 
     def sendData(self, data):
         self.client.sendto(data.encode('utf-8'), self.serverAddress)
-        print('testing')
 
-    def sendConnect(self):
-        self.client.sendto(f"connect,{self.playerId}".encode('utf-8'), self.serverAddress)
-
-    def sendDisconnect(self):
-        self.client.sendto(f"disconnect,{self.playerId}".encode('utf-8'), self.serverAddress)
 

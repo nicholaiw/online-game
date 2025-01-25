@@ -8,11 +8,88 @@ def loadFont(font):
     return str(fontPath)
 
 
-font = pygame.font.Font(loadFont('font'), 32)
+font = pygame.font.Font(loadFont('font'), 40)
 
 
 def drawText(text, font, color, x , y):
     textSurface = font.render(text, True, color)
     screen.blit(textSurface, textSurface.get_rect(center=(x, y)))
+
+class Button:
+    def __init__(self, x, y, w, h, type, state ):
+        self.rect = pygame.Rect(x, y, w, h)
+        self.type = type
+        self.state = state
+
+    def actions(self):
+        if pygame.mouse.get_pressed()[0]:
+            mousePos = pygame.mouse.get_pos()
+            if self.rect.collidepoint(mousePos):
+
+                if self.type == "changeState":
+                    activeStates.clear()
+                    activeStates.append(self.state)
+                
+                if self.type == "addState":
+                    activeStates.append(self.state)
+
+                if self.type == "removeState":
+                    activeStates.remove(self.state)
+
+                    
+
+    def draw(self):
+        pass
+        #pygame.draw.rect(screen, "#444477", self.rect)
+
+class InputField:
+
+    def __init__(self, x, y, w, h, text='', color="#ffffff", limit=False):
+        self.rect = pygame.Rect(x, y, w, h)
+        self.color = color
+        self.text = text
+        self.textSurface = font.render(text, True, self.color)
+        self.active = False
+        self.limit = limit
+        self.pressedKeys = set()
+        
+
+    def actions(self):
+        keys = pygame.key.get_pressed()
+
+        if pygame.mouse.get_pressed()[0]:
+            mousePos = pygame.mouse.get_pos()
+            if self.rect.collidepoint(mousePos):
+                self.active = True
+            else:
+                self.active = False
+
+        if self.active:
+            if keys[pygame.K_RETURN] and pygame.K_RETURN not in self.pressedKeys:
+                print(self.text)
+                self.text = ''
+                self.pressedKeys.add(pygame.K_RETURN)
+            elif keys[pygame.K_BACKSPACE] and pygame.K_BACKSPACE not in self.pressedKeys:
+                self.text = self.text[:-1]
+                self.pressedKeys.add(pygame.K_BACKSPACE)
+            else:
+                for i in range(pygame.K_a, pygame.K_z + 1):
+                    if keys[i] and i not in self.pressedKeys:
+                        char = pygame.key.name(i)
+                        if len(self.text) < self.limit or self.limit == False:
+                            self.text += char
+                        self.pressedKeys.add(i)
+
+        for i in list(self.pressedKeys):
+            if not keys[i]:
+                self.pressedKeys.remove(i)
+
+        self.textSurface = font.render(self.text, True,  self.color)
+
+
+    def draw(self):
+        screen.blit(self.textSurface, (self.rect.x + (self.rect.width - self.textSurface.get_width()) // 2,  
+                                       self.rect.y + 4 + (self.rect.height - self.textSurface.get_height()) // 2))
+        pygame.draw.rect(screen, self.color, self.rect, 2)
 
 

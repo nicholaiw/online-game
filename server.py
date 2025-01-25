@@ -7,35 +7,24 @@ PORT = 5555
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server.bind((HOST, PORT))
 
-players = {}
+clients = {}
+rooms = {}
 
 
-def receiveData(data, address):
-    DataType, data = data.decode('utf-8').split(',', 1)
-    playerId = address[1]
-
+def receiveData(Data, address):
+    DataType, data, clientID = Data.decode('utf-8').split(';', 2)
 
     if DataType == "connect":
-        players[playerId] = {"address": address, "x": 0, "y": 0}
-
-
-    elif DataType == "position":
-        x, y = map(int, data.split(','))
-        if playerId in players:
-            players[playerId]["x"] = x
-            players[playerId]["y"] = y
-        
-
+        clients[clientID] = address
     elif DataType == "disconnect":
-        if playerId in players:
-            del players[playerId]
+        del clients[clientID]
 
-            
 
 def sendData():
-    playerData = ';'.join([f"{pid},{p['x']},{p['y']}" for pid, p in players.items()])
-    for player in players.values():
-        server.sendto(playerData.encode('utf-8'), player["address"])
+    playerData = ';'.join([f"{pid},{p['x']},{p['y']}" for pid, p in rooms.items()])
+    for client in clients.values():
+        server.sendto(playerData.encode('utf-8'), client)
+
 
 def startServer():
     while True:

@@ -1,26 +1,33 @@
 from variables import *
-from gameScene.scene import gameScene
-from startScene.scene import startScene
+from gameState.scene import gameState
+from startState.scene import *
 from ui import *
 
 network.startReceiving()
-network.sendConnect()
+network.sendData("connect;none")
 
-activeScenes.append(gameScene)
-activeScenes.append(startScene)
+activeStates.append(startState)
+
+
+
 
 run = True
-while run:
+while run:    
+    screen.fill("#000000")
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:   
             run = False
 
-    for scenes in range(len(activeScenes)):
-        activeScenes[scenes]()
+
+
+
+    for scenes in range(len(activeStates)):
+        activeStates[scenes]()
+
 
     pygame.display.flip()
     clock.tick(60)
 
-network.sendDisconnect()
+network.sendData("disconnect;none")
 pygame.quit()
 network.client.close()
