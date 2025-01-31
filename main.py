@@ -1,6 +1,6 @@
 from variables import *
-from gameState.scene import gameState
-from startState.scene import *
+from gameState.gameState import gameState
+from startState.startState import *
 from ui import *
 
 network.startReceiving()
@@ -17,7 +17,6 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   
             run = False
-
 
 
 

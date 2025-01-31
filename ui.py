@@ -90,6 +90,6 @@ class InputField:
     def draw(self):
         screen.blit(self.textSurface, (self.rect.x + (self.rect.width - self.textSurface.get_width()) // 2,  
                                        self.rect.y + 4 + (self.rect.height - self.textSurface.get_height()) // 2))
-        pygame.draw.rect(screen, self.color, self.rect, 2)
+       #pygame.draw.rect(screen, self.color, self.rect, 2)
 
 
