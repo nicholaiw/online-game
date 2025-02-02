@@ -16,26 +16,35 @@ def drawText(text, font, color, x , y):
     screen.blit(textSurface, textSurface.get_rect(center=(x, y)))
 
 class Button:
-    def __init__(self, x, y, w, h, type, state ):
+    def __init__(self, x, y, w, h, type, state=None):
         self.rect = pygame.Rect(x, y, w, h)
         self.type = type
         self.state = state
+        self.pressed = False
 
-    def actions(self):
-        if pygame.mouse.get_pressed()[0]:
-            mousePos = pygame.mouse.get_pos()
-            if self.rect.collidepoint(mousePos):
+    def actions(self, data=None):
+        mousePressed = pygame.mouse.get_pressed()[0]
+        mousePos = pygame.mouse.get_pos()
 
-                if self.type == "changeState":
-                    activeStates.clear()
-                    activeStates.append(self.state)
-                
-                if self.type == "addState":
-                    activeStates.append(self.state)
+        if mousePressed and self.rect.collidepoint(mousePos) and not self.pressed:
+            self.pressed = True
 
-                if self.type == "removeState":
-                    activeStates.remove(self.state)
+            if self.type == "changeState":
+                activeStates.clear()
+                activeStates.append(self.state)
+            
+            elif self.type == "addState":
+                activeStates.append(self.state)
 
+            elif self.type == "removeState":
+                activeStates.remove(self.state)
+            
+            elif self.type == "createGame" or self.type == "joinGame":
+                print(f"{self.type};{data}")
+                network.sendData(f"{self.type};{data}")
+
+        elif not mousePressed:
+            self.pressed = False
                     
 
     def draw(self):

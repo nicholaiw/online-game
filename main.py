@@ -4,7 +4,7 @@ from startState.startState import *
 from ui import *
 
 network.startReceiving()
-network.sendData("connect;none")
+network.sendData("connect")
 
 activeStates.append(startState)
 
@@ -17,7 +17,10 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   
             run = False
-
+        
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                print(network.roomData)
 
 
     for scenes in range(len(activeStates)):
@@ -27,6 +30,6 @@ while run:
     pygame.display.flip()
     clock.tick(60)
 
-network.sendData("disconnect;none")
-pygame.quit()
+network.sendData("disconnect")
 network.client.close()
+pygame.quit()

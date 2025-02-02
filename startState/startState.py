@@ -35,6 +35,8 @@ def createState():
     screen.blit(createImage, startImageRect)
     createNameInput.actions()
     createNameInput.draw()
+    createPlayButton.actions(createNameInput.text)
+
 
 
 def joinState():
@@ -51,8 +53,9 @@ createButton = Button(64*widthMultiplier, 70*heightMultiplier, 80*widthMultiplie
 joinButton = Button(64*widthMultiplier, 102*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, "changeState", joinState)
 
 createNameInput = InputField(64*widthMultiplier, 72*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 12)
+createPlayButton = Button(87*widthMultiplier, 96 *heightMultiplier, 35*widthMultiplier, 16*heightMultiplier, "createGame")
+
 
 joinCodeInput = InputField(64*widthMultiplier, 56*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 5)
 joinNameInput = InputField(64*widthMultiplier, 88*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 12)
-
 
