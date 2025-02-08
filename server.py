@@ -56,10 +56,11 @@ def receiveData(data, address):
             createRoom(clientID, name)
 
         elif data.startswith("joinGame"):
-            _, roomCode = data.split(';', 1)
+            _, roomCode, name = data.split(';', 2)
+
             if roomCode in rooms:
                 rooms[roomCode]["players"][clientID] = {
-                    "name": "Player",
+                    "name": name,
                     "positionX": 0,
                     "positionY": 0
                 }
@@ -72,6 +73,7 @@ def sendData():
                 f"{clientID},{player['name']},{player['positionX']},{player['positionY']}"
                 for clientID, player in list(roomInfo["players"].items())
             ])
+
             for clientID in list(roomInfo["players"].keys()):
                 if clientID in clients:
                     server.sendto(playerData.encode('utf-8'), clients[clientID])
@@ -92,6 +94,7 @@ def startServer():
         while True:
             try:
                 data, address = server.recvfrom(1024)
+                print(rooms)
                 executor.submit(receiveData, data, address)
             except Exception as e:
                 print(f"Error: {e}")

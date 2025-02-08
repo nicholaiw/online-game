@@ -49,7 +49,7 @@ class Button:
 
     def draw(self):
         pass
-        #pygame.draw.rect(screen, "#444477", self.rect)
+        pygame.draw.rect(screen, "#444477", self.rect)
 
 class InputField:
 

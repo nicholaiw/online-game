@@ -48,6 +48,9 @@ def joinState():
     joinCodeInput.draw()
     joinNameInput.draw()
 
+    joinPlayButton.actions(f"{joinCodeInput.text};{joinNameInput.text}")
+    joinPlayButton.draw()
+    
 
 createButton = Button(64*widthMultiplier, 70*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, "changeState", createState)
 joinButton = Button(64*widthMultiplier, 102*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, "changeState", joinState)
@@ -56,6 +59,6 @@ createNameInput = InputField(64*widthMultiplier, 72*heightMultiplier, 80*widthMu
 createPlayButton = Button(87*widthMultiplier, 96 *heightMultiplier, 35*widthMultiplier, 16*heightMultiplier, "createGame")
 
 
-joinCodeInput = InputField(64*widthMultiplier, 56*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 5)
+joinCodeInput = InputField(64*widthMultiplier, 56*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 6)
 joinNameInput = InputField(64*widthMultiplier, 88*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 12)
-
+joinPlayButton = Button(87*widthMultiplier, 112 *heightMultiplier, 35*widthMultiplier, 16*heightMultiplier, "joinGame")
