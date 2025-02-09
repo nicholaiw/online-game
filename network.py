@@ -35,6 +35,7 @@ class Network:
                         'positionY': int(playerDetails[3])
                     }
                 self.roomData = {'roomCode': roomCode, 'players': players}
+            
 
 
                 

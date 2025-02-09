@@ -5,8 +5,10 @@ from ui import *
 
 network.startReceiving()
 network.sendData("connect")
-
 activeStates.append(startState)
+
+
+
 
 
 
@@ -22,6 +24,10 @@ while run:
             if event.key == pygame.K_SPACE:
                 print(network.roomData)
 
+
+    if network.roomData:
+        activeStates.clear()
+        activeStates.append(gameState)
 
     for scenes in range(len(activeStates)):
         activeStates[scenes]()

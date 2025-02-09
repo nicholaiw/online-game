@@ -31,8 +31,12 @@ def createRoom(clientID, name):
 clientsLock = threading.Lock()
 roomsLock = threading.Lock()
 
+
 def receiveData(data, address):
+
     data = data.decode('utf-8')
+    print(data)
+
     clientID, data = data.split(';', 1)
 
     with clientsLock:
@@ -65,6 +69,22 @@ def receiveData(data, address):
                     "positionY": 0
                 }
 
+        elif data.startswith("position"):
+            _, positionData = data.split(';', 1)
+            positionX, positionY = positionData.split(',', 1)
+            positionX = int(positionX)
+            positionY = int(positionY)
+
+            print(f"client:{clientID}   x-cords:{positionX}    y-cords_{positionY}")
+
+            for roomCode, roomInfo in rooms.items():
+                if clientID in roomInfo["players"]:
+                    print('updated player position ')
+                    roomInfo["players"][clientID]["positionX"] = positionX
+                    roomInfo["players"][clientID]["positionY"] = positionY
+                    break
+
+
 
 def sendData():
     with roomsLock:
@@ -94,7 +114,6 @@ def startServer():
         while True:
             try:
                 data, address = server.recvfrom(1024)
-                print(rooms)
                 executor.submit(receiveData, data, address)
             except Exception as e:
                 print(f"Error: {e}")

@@ -49,7 +49,7 @@ def joinState():
     joinNameInput.draw()
 
     joinPlayButton.actions(f"{joinCodeInput.text};{joinNameInput.text}")
-    joinPlayButton.draw()
+
     
 
 createButton = Button(64*widthMultiplier, 70*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, "changeState", createState)
