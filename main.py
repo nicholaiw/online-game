@@ -39,3 +39,4 @@ while run:
 network.sendData("disconnect")
 network.client.close()
 pygame.quit()
+

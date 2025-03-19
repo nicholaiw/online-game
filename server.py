@@ -15,7 +15,7 @@ rooms = {}
 def createRoom(clientID, name):
     characters = 'abcdefghijklmnopqrstuvwxyz'
     while True:
-        roomCode = ''.join(random.choices(characters, k=6))
+        roomCode = ''.join(random.choices(characters, k=4))
         if roomCode not in rooms:
             rooms[roomCode] = {
                 "players": {

@@ -13,12 +13,11 @@ mainImage = loadImage("main")
 createImage = loadImage("create")
 joinImage = loadImage("join")
 
-widthMultiplier = 3.84
-heightMultiplier = 3.75
 
-mainImage = pygame.transform.scale(mainImage, (int(mainImage.get_width() * widthMultiplier), int(mainImage.get_height() * heightMultiplier)))
-createImage = pygame.transform.scale(createImage, (int(createImage.get_width() * widthMultiplier), int(createImage.get_height() * heightMultiplier)))
-joinImage = pygame.transform.scale(joinImage, (int(joinImage.get_width() * widthMultiplier), int(joinImage.get_height() * heightMultiplier)))
+
+mainImage = pygame.transform.scale(mainImage, (int(mainImage.get_width() * ratioMultiplier), int(mainImage.get_height() * ratioMultiplier)))
+createImage = pygame.transform.scale(createImage, (int(createImage.get_width() * ratioMultiplier), int(createImage.get_height() * ratioMultiplier)))
+joinImage = pygame.transform.scale(joinImage, (int(joinImage.get_width() * ratioMultiplier), int(joinImage.get_height() * ratioMultiplier)))
 
 startImageRect = ((screen.get_width() - mainImage.get_width()) // 2, 
                   (screen.get_height() - mainImage.get_height()) // 2)
@@ -52,13 +51,13 @@ def joinState():
 
     
 
-createButton = Button(64*widthMultiplier, 70*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, "changeState", createState)
-joinButton = Button(64*widthMultiplier, 102*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, "changeState", joinState)
+createButton = Button(120*ratioMultiplier, 90*ratioMultiplier, 80*ratioMultiplier, 16*ratioMultiplier, "changeState", createState)
+joinButton = Button(120*ratioMultiplier, 120*ratioMultiplier, 80*ratioMultiplier, 16*ratioMultiplier, "changeState", joinState)
 
-createNameInput = InputField(64*widthMultiplier, 72*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 12)
-createPlayButton = Button(87*widthMultiplier, 96 *heightMultiplier, 35*widthMultiplier, 16*heightMultiplier, "createGame")
+createNameInput = InputField(120*ratioMultiplier, 93*ratioMultiplier, 80*ratioMultiplier, 16*ratioMultiplier, '', "#97929a", 12)
+createPlayButton = Button(143*ratioMultiplier, 117 *ratioMultiplier, 35*ratioMultiplier, 16*ratioMultiplier, "createGame")
 
 
-joinCodeInput = InputField(64*widthMultiplier, 56*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 6)
-joinNameInput = InputField(64*widthMultiplier, 88*heightMultiplier, 80*widthMultiplier, 16*heightMultiplier, '', "#97929a", 12)
-joinPlayButton = Button(87*widthMultiplier, 112 *heightMultiplier, 35*widthMultiplier, 16*heightMultiplier, "joinGame")
+joinCodeInput = InputField(120*ratioMultiplier, 109*ratioMultiplier, 80*ratioMultiplier, 16*ratioMultiplier, '', "#97929a", 4)
+joinNameInput = InputField(120*ratioMultiplier, 77*ratioMultiplier, 80*ratioMultiplier, 16*ratioMultiplier, '', "#97929a", 10)
+joinPlayButton = Button(143*ratioMultiplier, 133 *ratioMultiplier, 35*ratioMultiplier, 16*ratioMultiplier, "joinGame")
