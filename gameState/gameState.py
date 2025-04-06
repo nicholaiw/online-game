@@ -9,14 +9,12 @@ def localPlayerInput():
     localPlayer.input()
     network.sendData(f'position;{localPlayer.rect.x},{localPlayer.rect.y}')
 
+
 def drawPlayers():
-    roomData = network.roomData
-    if 'players' not in roomData:
+    if 'players' not in network.roomData:
         return
 
-    cameraTarget = None
-
-    for playerId, playerData in roomData['players'].items():
+    for playerId, playerData in network.roomData['players'].items():
         if playerId not in [sprite.playerId for sprite in spriteBatch.sprites() if hasattr(sprite, 'playerId')]:
             newPlayer = Player()
             newPlayer.playerId = playerId
@@ -32,11 +30,10 @@ def drawPlayers():
             cameraTarget = player
 
     for sprite in spriteBatch.sprites():
-        if hasattr(sprite, 'playerId') and sprite.playerId not in roomData['players']:
+        if hasattr(sprite, 'playerId') and sprite.playerId not in network.roomData['players']:
             sprite.kill()
 
     return cameraTarget
-
 
 
 def gameState():

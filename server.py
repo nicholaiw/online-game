@@ -12,6 +12,9 @@ server.bind((HOST, PORT))
 clients = {}
 rooms = {}
 
+clientsLock = threading.Lock()
+roomsLock = threading.Lock()
+
 def createRoom(clientID, name):
     characters = 'abcdefghijklmnopqrstuvwxyz'
     while True:
@@ -27,9 +30,6 @@ def createRoom(clientID, name):
                 }
             }
             break     
-
-clientsLock = threading.Lock()
-roomsLock = threading.Lock()
 
 
 def receiveData(data, address):

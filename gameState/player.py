@@ -36,11 +36,7 @@ class Player(pygame.sprite.Sprite):
             length = math.sqrt(directionX**2 + directionY**2)
             directionX = directionX / length
             directionY = directionY / length
-        self.movement(directionX * self.speed, directionY * self.speed)
 
-    def movement(self, directionX, directionY):
         self.rect.x += directionX
         self.rect.y += directionY
 
-    def draw(self, screen):
-        screen.blit(self.image, self.rect)

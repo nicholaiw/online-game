@@ -43,10 +43,8 @@ def joinState():
 
     joinCodeInput.actions()
     joinNameInput.actions()
-
     joinCodeInput.draw()
     joinNameInput.draw()
-
     joinPlayButton.actions(f"{joinCodeInput.text};{joinNameInput.text}")
 
     

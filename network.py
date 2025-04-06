@@ -13,14 +13,12 @@ class Network:
         self.serverAddress = (self.host, self.port)
 
 
-
     def receiveData(self):
 
         while True:
             data, _ = self.client.recvfrom(1024)
             data = data.decode('utf-8')
 
-            
             if data.startswith("roomUpdate"):
                 dataParts = data.split(';')
                 roomCode = dataParts[1]
@@ -43,9 +41,7 @@ class Network:
     def startReceiving(self):
         receiveThread = threading.Thread(target=self.receiveData)
         receiveThread.start()
-
-
-                             
+               
     def sendData(self, data):
         self.client.sendto(f'{self.clientID};{data}'.encode('utf-8'), self.serverAddress)
 
